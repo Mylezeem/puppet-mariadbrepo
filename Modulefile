@@ -1,0 +1,8 @@
+name    'yguenane-mariadbrepo'
+version '0.1.0'
+source 'https://github.com/Mylezeem/puppet-mariadbrepo'
+author 'Yanis Guenane'
+license 'Apache License, Version 2.0'
+summary 'A puppet module that configure the MariaDB repository on an Enterprise Linux (and relatives) system'
+description 'A puppet module that configure the MariaDB repository on an Enterprise Linux (and relatives) system'
+project_page 'https://github.com/Mylezeem/puppet-mariadbrepo'
