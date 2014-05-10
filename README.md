@@ -1,5 +1,7 @@
 #puppet-mariadbrepo
 
+[![Build Status](https://travis-ci.org/Mylezeem/puppet-mariadbrepo.svg?branch=master)](https://travis-ci.org/Mylezeem/puppet-mariadbrepo)
+
 ##Overview
 A puppet module that configure the MariaDB repository on an Enterprise Linux (and relatives) system
 

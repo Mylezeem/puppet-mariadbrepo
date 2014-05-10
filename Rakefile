@@ -1,6 +1,10 @@
 require 'puppet-lint'
 require 'puppetlabs_spec_helper/rake_tasks'
 
+
+desc 'Run syntax, lint and spec tests'
+task :test => [:validate,:lint]
+
 desc "Validate the Puppet syntax of all manifests"
 task :validate do
   Dir['./manifests/**/*.pp'].each do |filename|
