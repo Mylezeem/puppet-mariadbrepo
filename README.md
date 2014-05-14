@@ -21,13 +21,18 @@ As it simplest, simply include the `mariadbrepo` class
 include mariadbrepo
 ```
 
-If one wants a specific version of MariaDB simply specify it (defaul is 10.0)
+If one wants a specific version of MariaDB simply specify it (default is 10.0)
 
 ```puppet
 class {'mariadbrepo' :
   version => '5.5',
 }
 ```
+##Parameters
+
+####`version`
+
+Version of MariaDB repo to install. Current Possible values are '5.5' or '10.0' (default)
 
 ##Limitations
 
