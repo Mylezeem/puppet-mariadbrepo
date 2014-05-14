@@ -9,10 +9,6 @@
 #   Possible value: 5.5, 10.0
 #   Default: 10.0
 #
-# [*repo_desc_path*]
-#   (string) Path to the repositories description files
-#   Default: /etc/yum.repos.d/
-#
 # === Examples
 #
 #  include mariadbrepo
@@ -33,8 +29,7 @@
 #
 class mariadbrepo (
   $version        = '10.0',
-  $repo_desc_path = '/etc/yum.repos.d',
-){
+) {
 
   if ! ($::operatingsystem in ['RedHat', 'Fedora', 'CentOS']) {
     fail ("This module does not support your operating system : ${::operatingsystem}")
@@ -57,9 +52,10 @@ class mariadbrepo (
     'x86_64' => 'amd64',
   }
 
-  file { "${repo_desc_path}/mariadb.repo" :
-    ensure  => present,
-    content => template('mariadbrepo/mariadb.repo'),
+  yumrepo { 'MariaDB' :
+    baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
+    gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
+    gpgcheck => true,
   }
 
 }
