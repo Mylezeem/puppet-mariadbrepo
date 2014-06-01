@@ -55,7 +55,7 @@ class mariadbrepo (
   yumrepo { 'MariaDB' :
     baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
     gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
-    gpgcheck => true,
+    gpgcheck => 1,
   }
 
 }

@@ -48,7 +48,7 @@ describe 'mariadbrepo' do
             should contain_yumrepo('MariaDB').with({
               'baseurl'  => "http://yum.mariadb.org/#{mariadb_release}/#{os}#{vers_maj}-#{arch}",
               'gpgkey'   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
-              'gpgcheck' => 'true',
+              'gpgcheck' => '1',
             })
           }
 
