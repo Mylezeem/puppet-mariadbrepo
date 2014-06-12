@@ -1,5 +1,5 @@
 language: ruby
-script: "bundle install --gemfile .gemfile && BUNDLE_GEMFILE=.gemfile bundle exec rake test SPEC_OPTS='--format n --color --backtrace'"
+script: "bundle install --gemfile .gemfile && BUNDLE_GEMFILE=.gemfile bundle exec rake test SPEC_OPTS='--format documentation --color --backtrace'"
 rvm:
  - 1.9.3
  - 2.0.0
