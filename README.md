@@ -3,15 +3,13 @@
 [![Build Status](https://travis-ci.org/Mylezeem/puppet-mariadbrepo.svg?branch=master)](https://travis-ci.org/Mylezeem/puppet-mariadbrepo)
 
 ##Overview
-A puppet module that configure the MariaDB repository on an Enterprise Linux (and relatives) system
+A puppet module that configure the MariaDB repository on a Linux system.
 
 **Notes**: EL7 will come with the MariaDB packages in its default repository, but this is not the case for EL5 and EL6.
 This modules targets those specific platforms.
 
 ##Module Description
 Based on your system specifications, this module will install a the repository to install MariaDB.
-
-**Notes**: As specified in the description, it works only for Enterprise Linux and its relatives.
 
 ##Usage
 
@@ -41,4 +39,5 @@ This module works for :
 * EL5
 * EL6
 * Fedora 19/20
-
+* Debian 6/7
+* Ubuntu 10.04/12.04/14.04/14.10
