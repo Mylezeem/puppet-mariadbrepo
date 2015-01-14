@@ -1,8 +1,12 @@
 # == Class: mariadbrepo
 #
-# A puppet module that configure the MariaDB repository on an Enterprise Linux (and relatives) system
+# A puppet module that configure the MariaDB repository on a Linux system.
 #
 # === Parameters
+#
+# [*mirror*]
+#   (string) MariaDB mirror (apt only)
+#   Default: 'http://ftp.osuosl.org/pub/mariadb'
 #
 # [*version*]
 #   (float) MariaDB version number
@@ -22,23 +26,23 @@
 # === Authors
 #
 # Yanis Guenane <yguenane@gmail.com>
+# Dimitri Savineau <savineau.dimitri@gmail.com>
 #
 # === Copyright
 #
 # Copyright 2014 Yanis Guenane
 #
 class mariadbrepo (
-  $version        = '10.0',
+  $mirror  = 'http://ftp.osuosl.org/pub/mariadb',
+  $version = '10.0',
 ) {
-
-  if ! ($::operatingsystem in ['RedHat', 'Fedora', 'CentOS']) {
-    fail ("This module does not support your operating system : ${::operatingsystem}")
-  }
 
   $os = $::operatingsystem ? {
     'RedHat' => 'rhel',
     'CentOS' => 'centos',
     'Fedora' => 'fedora',
+    'Debian' => 'debian',
+    'Ubuntu' => 'ubuntu',
   }
 
   $os_ver = $::operatingsystemrelease ? {
@@ -52,11 +56,27 @@ class mariadbrepo (
     'x86_64' => 'amd64',
   }
 
-  yumrepo { 'MariaDB' :
-    descr    => 'MariaDB',
-    baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
-    gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
-    gpgcheck => 1,
+  case $::operatingsystem {
+    'RedHat','CentOS','Fedora': {
+      yumrepo { 'MariaDB' :
+        descr    => 'MariaDB',
+        baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
+        gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
+        gpgcheck => 1,
+      }
+    }
+    'Debian','Ubuntu': {
+      apt::source { 'MariaDB':
+        location   => "${mirror}/repo/${version}/${os}",
+        release    => $::lsbdistcodename,
+        repos      => 'main',
+        key        => '1BB943DB',
+        key_server => 'keyserver.ubuntu.com',
+      }
+    }
+    default: {
+      fail ("This module does not support your operating system : ${::operatingsystem}")
+    }
   }
 
 }

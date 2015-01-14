@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'mariadbrepo' do
 
-  ['Fedora', 'RedHat', 'CentOS'].each do |operatingsystem|
+  ['Fedora', 'RedHat', 'CentOS', 'Debian', 'Ubuntu'].each do |operatingsystem|
     ['5.5', '10.0'].each do |mariadb_release|
       ['i386', 'x86_64'].each do |architecture|
 
@@ -18,9 +18,15 @@ describe 'mariadbrepo' do
             vers_maj  = '6'
             vers_full = '6.5'
           when 'CentOS'
-            os   = 'centos'
+            os        = 'centos'
             vers_maj  = '6'
             vers_full = '6.5'
+          when 'Debian'
+            os        = 'debian'
+            codename  = 'wheezy'
+          when 'Ubuntu'
+            os        = 'ubuntu'
+            codename  = 'precise'
           end
 
           case architecture
@@ -35,6 +41,8 @@ describe 'mariadbrepo' do
               :operatingsystem        => operatingsystem,
               :operatingsystemrelease => vers_full,
               :architecture           => architecture,
+              :lsbdistcodename        => codename,
+              :lsbdistid              => "#{operatingsystem}"
             }
           end
 
@@ -44,15 +52,27 @@ describe 'mariadbrepo' do
             }
           end
 
-          it {
-            should contain_yumrepo('MariaDB').with({
-              'descr'    => 'MariaDB',
-              'baseurl'  => "http://yum.mariadb.org/#{mariadb_release}/#{os}#{vers_maj}-#{arch}",
-              'gpgkey'   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
-              'gpgcheck' => '1',
-            })
-          }
-
+          case operatingsystem
+          when 'Fedora','RedHat','CentOS'
+            it {
+              should contain_yumrepo('MariaDB').with({
+                'descr'    => 'MariaDB',
+                'baseurl'  => "http://yum.mariadb.org/#{mariadb_release}/#{os}#{vers_maj}-#{arch}",
+                'gpgkey'   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
+                'gpgcheck' => '1',
+              })
+            }
+          when
+            it {
+              should contain_apt__source('MariaDB').with({
+                'location'   => "http://ftp.osuosl.org/pub/mariadb/repo/#{mariadb_release}/#{os}",
+                'release'    => "#{codename}",
+                'repos'      => 'main',
+                'key'        => '1BB943DB',
+                'key_server' => 'keyserver.ubuntu.com',
+              })
+            }
+          end
         end
       end
     end
