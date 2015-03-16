@@ -46,7 +46,8 @@ class mariadbrepo (
   }
 
   $os_ver = $::operatingsystemrelease ? {
-    /6.[0-9]/  => '6',
+    /7.[0-9]+/ => '7',
+    /6.[0-9]+/ => '6',
     /5.[0-9]+/ => '5',
     default    => $::operatingsystemrelease,
   }
