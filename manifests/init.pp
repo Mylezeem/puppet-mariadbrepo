@@ -55,6 +55,7 @@ class mariadbrepo (
   $arch = $::architecture ? {
     'i386'   => 'x86',
     'x86_64' => 'amd64',
+    default  => $::architecture,
   }
 
   case $::operatingsystem {
