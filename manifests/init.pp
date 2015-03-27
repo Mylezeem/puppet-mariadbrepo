@@ -4,6 +4,10 @@
 #
 # === Parameters
 #
+# [*ensure*]
+#   (string) Should the repository file be present on the system
+#   Default: 'present'
+#
 # [*mirror*]
 #   (string) MariaDB mirror (apt only)
 #   Default: 'http://ftp.osuosl.org/pub/mariadb'
@@ -33,6 +37,7 @@
 # Copyright 2014 Yanis Guenane
 #
 class mariadbrepo (
+  $ensure  = 'present',
   $mirror  = 'http://ftp.osuosl.org/pub/mariadb',
   $version = '10.0',
 ) {
@@ -61,6 +66,7 @@ class mariadbrepo (
   case $::operatingsystem {
     'RedHat','CentOS','Fedora': {
       yumrepo { 'MariaDB' :
+        ensure   => $ensure,
         descr    => 'MariaDB',
         baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
         gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
@@ -69,6 +75,7 @@ class mariadbrepo (
     }
     'Debian','Ubuntu': {
       apt::source { 'MariaDB':
+        ensure     => $ensure,
         location   => "${mirror}/repo/${version}/${os}",
         release    => $::lsbdistcodename,
         repos      => 'main',

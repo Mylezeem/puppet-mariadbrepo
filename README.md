@@ -30,6 +30,10 @@ class {'mariadbrepo' :
 ```
 ##Parameters
 
+####`ensure`
+
+Specify if the repository file should be present on the system. Possible values are `present` (default) or `absent`
+
 ####`mirror`
 
 Specify the mirror to pull the packages from (ie. Debian based OS only)
