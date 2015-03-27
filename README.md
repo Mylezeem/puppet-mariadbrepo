@@ -1,6 +1,9 @@
 #puppet-mariadbrepo
 
-[![Build Status](https://travis-ci.org/Mylezeem/puppet-mariadbrepo.svg?branch=master)](https://travis-ci.org/Mylezeem/puppet-mariadbrepo)
+[![Build Status](https://api.travis-ci.org/Mylezeem/puppet-mariadbrepo.svg?branch=master)](https://travis-ci.org/Mylezeem/puppet-mariadbrepo)
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/yguenane/mariadbrepo.svg)](https://forge.puppetlabs.com/yguenane/mariadbrepo)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/yguenane/mariadbrepo.svg)](https://forge.puppetlabs.com/yguenane/mariadbrepo)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ##Overview
 
