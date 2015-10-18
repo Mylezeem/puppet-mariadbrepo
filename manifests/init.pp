@@ -14,8 +14,8 @@
 #
 # [*version*]
 #   (float) MariaDB version number
-#   Possible value: 5.5, 10.0
-#   Default: 10.0
+#   Possible value: 5.5, 10.1
+#   Default: 10.1
 #
 # === Examples
 #
@@ -39,7 +39,7 @@
 class mariadbrepo (
   $ensure  = 'present',
   $mirror  = 'http://ftp.osuosl.org/pub/mariadb',
-  $version = '10.0',
+  $version = '10.1',
 ) {
 
   $os = $::operatingsystem ? {
