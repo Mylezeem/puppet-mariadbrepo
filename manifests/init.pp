@@ -75,14 +75,14 @@ class mariadbrepo (
     }
     'Debian','Ubuntu': {
       apt::source { 'MariaDB':
-        ensure     => $ensure,
-        location   => "${mirror}/repo/${version}/${os}",
-        release    => $::lsbdistcodename,
-        repos      => 'main',
+        ensure   => $ensure,
+        location => "${mirror}/repo/${version}/${os}",
+        release  => $::lsbdistcodename,
+        repos    => 'main',
         key      => {
-            'id'     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
-            'server' => 'keyserver.ubuntu.com',
-        }
+          'id'     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+          'server' => 'keyserver.ubuntu.com',
+        },
       }
     }
     default: {
