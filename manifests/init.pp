@@ -79,8 +79,10 @@ class mariadbrepo (
         location   => "${mirror}/repo/${version}/${os}",
         release    => $::lsbdistcodename,
         repos      => 'main',
-        key        => '1BB943DB',
-        key_server => 'keyserver.ubuntu.com',
+        key      => {
+            'id'     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+            'server' => 'keyserver.ubuntu.com',
+        }
       }
     }
     default: {
