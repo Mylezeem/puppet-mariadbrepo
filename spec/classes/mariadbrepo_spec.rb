@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'mariadbrepo' do
 
   ['Fedora', 'RedHat', 'CentOS', 'Debian', 'Ubuntu'].each do |operatingsystem|
-    ['5.5', '10.0'].each do |mariadb_release|
+    ['5.5', '10.1'].each do |mariadb_release|
       ['i386', 'x86_64'].each do |architecture|
         ['present', 'absent'].each do |package_ensure|
 
@@ -68,12 +68,14 @@ describe 'mariadbrepo' do
             when
               it {
                 should contain_apt__source('MariaDB').with({
-                  'ensure'     => package_ensure,
-                  'location'   => "http://ftp.osuosl.org/pub/mariadb/repo/#{mariadb_release}/#{os}",
-                  'release'    => "#{codename}",
-                  'repos'      => 'main',
-                  'key'        => '1BB943DB',
-                  'key_server' => 'keyserver.ubuntu.com',
+                  'ensure'   => package_ensure,
+                  'location' => "http://ftp.osuosl.org/pub/mariadb/repo/#{mariadb_release}/#{os}",
+                  'release'  => "#{codename}",
+                  'repos'    => 'main',
+                  'key'      => {
+                    'id'     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+                    'server' => 'keyserver.ubuntu.com',
+                  },
                 })
               }
             end
