@@ -23,14 +23,15 @@ RSpec.configure do |c|
 
   # Readable test descriptions
   c.formatter = :documentation
-  
+
   # Configure all nodes in nodeset
   c.before :suite do
+    # Install module and dependencies
+    puppet_module_install(:source => proj_root, :module_name => 'mariadbrepo')
     hosts.each do |host|
-      on host, "mkdir -p #{host['distmoduledir']}/mariadbrepo"
-      %w(manifests metadata.json).each do |file|
-        scp_to host, "#{proj_root}/#{file}", "#{host['distmoduledir']}/mariadbrepo"
-      end
+      # Needed for the consul module to download the binary per the modulefile
+      on host, puppet('module', 'install', 'puppetlabs/stdlib', '--version', '4.9.0'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module', 'install', 'puppetlabs/apt', '--version', '2.2.0'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end

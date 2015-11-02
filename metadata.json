@@ -48,7 +48,7 @@
     }
   ],
   "name": "yguenane-mariadbrepo",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "source": "https://github.com/Mylezeem/puppet-mariadbrepo",
   "author": "Yanis Guenane",
   "license": "Apache-2.0",
@@ -62,7 +62,7 @@
     },
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">= 1.7.0 < 2.0.0"
+      "version_requirement": ">= 2.2.0 < 3.0.0"
     }
   ]
 }

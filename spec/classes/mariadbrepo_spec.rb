@@ -14,20 +14,25 @@ describe 'mariadbrepo' do
               os        = 'fedora'
               vers_maj  = '20'
               vers_full = '20'
+              osfamily  = 'RedHat'
             when 'RedHat'
               os        = 'rhel'
               vers_maj  = '6'
               vers_full = '6.5'
+              osfamily  = 'RedHat'
             when 'CentOS'
               os        = 'centos'
               vers_maj  = '6'
               vers_full = '6.5'
+              osfamily  = 'RedHat'
             when 'Debian'
               os        = 'debian'
               codename  = 'wheezy'
+              osfamily  = 'Debian'
             when 'Ubuntu'
               os        = 'ubuntu'
               codename  = 'precise'
+              osfamily  = 'Debian'
             end
 
             case architecture
@@ -41,6 +46,7 @@ describe 'mariadbrepo' do
               {
                 :operatingsystem        => operatingsystem,
                 :operatingsystemrelease => vers_full,
+                :osfamily               => osfamily,
                 :architecture           => architecture,
                 :lsbdistcodename        => codename,
                 :lsbdistid              => "#{operatingsystem}"
@@ -68,12 +74,14 @@ describe 'mariadbrepo' do
             when
               it {
                 should contain_apt__source('MariaDB').with({
-                  'ensure'     => package_ensure,
-                  'location'   => "http://ftp.osuosl.org/pub/mariadb/repo/#{mariadb_release}/#{os}",
-                  'release'    => "#{codename}",
-                  'repos'      => 'main',
-                  'key'        => '1BB943DB',
-                  'key_server' => 'keyserver.ubuntu.com',
+                  'ensure'   => package_ensure,
+                  'location' => "http://ftp.osuosl.org/pub/mariadb/repo/#{mariadb_release}/#{os}",
+                  'release'  => "#{codename}",
+                  'repos'    => 'main',
+                  'key'      => {
+                    'id'     => '199369E5404BD5FC7D2FE43BCBCB082A1BB943DB',
+                    'server' => 'keyserver.ubuntu.com',
+                  },
                 })
               }
             end
