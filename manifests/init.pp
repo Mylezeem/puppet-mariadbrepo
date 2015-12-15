@@ -50,13 +50,6 @@ class mariadbrepo (
     'Ubuntu' => 'ubuntu',
   }
 
-  $os_ver = $::operatingsystemrelease ? {
-    /7.[0-9]+/ => '7',
-    /6.[0-9]+/ => '6',
-    /5.[0-9]+/ => '5',
-    default    => $::operatingsystemrelease,
-  }
-
   $arch = $::architecture ? {
     'i386'   => 'x86',
     'x86_64' => 'amd64',
@@ -68,7 +61,7 @@ class mariadbrepo (
       yumrepo { 'MariaDB' :
         ensure   => $ensure,
         descr    => 'MariaDB',
-        baseurl  => "http://yum.mariadb.org/${version}/${os}${os_ver}-${arch}",
+        baseurl  => "http://yum.mariadb.org/${version}/${os}${::operatingsystemmajrelease}-${arch}",
         gpgkey   => 'https://yum.mariadb.org/RPM-GPG-KEY-MariaDB',
         gpgcheck => 1,
       }
