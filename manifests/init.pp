@@ -31,7 +31,7 @@
 #
 # Yanis Guenane <yguenane@gmail.com>
 # Dimitri Savineau <savineau.dimitri@gmail.com>
-# Alberto Varela Sánchez <alberto@berriart.com>
+# Alberto Varela Sanchez <alberto@berriart.com>
 #
 # === Copyright
 #
