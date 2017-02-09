@@ -5,6 +5,6 @@ fixtures:
       ref: '3.2.1'
     'apt':
       repo: 'https://github.com/puppetlabs/puppetlabs-apt.git'
-      ref: '1.7.0'
+      ref: '2.3.0'
   symlinks:
     "mariadbrepo": "#{source_dir}"
