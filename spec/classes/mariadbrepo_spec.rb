@@ -43,7 +43,9 @@ describe 'mariadbrepo' do
                 :operatingsystemrelease => vers_full,
                 :architecture           => architecture,
                 :lsbdistcodename        => codename,
-                :lsbdistid              => "#{operatingsystem}"
+                :lsbdistid              => "#{operatingsystem}",
+                :osfamily               =>
+                  operatingsystem =~ /(Debian|Ubuntu)/ ? 'Debian' : 'RedHat',
               }
             end
 
